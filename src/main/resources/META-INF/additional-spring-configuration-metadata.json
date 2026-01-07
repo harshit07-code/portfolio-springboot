@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "sendgrid.from.email",
+  "type": "java.lang.String",
+  "description": "A description for 'sendgrid.from.email'"
+}]}

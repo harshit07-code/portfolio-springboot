@@ -1,5 +1,6 @@
 package com.harshit.demo.Controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,7 +12,7 @@ import com.harshit.demo.Service.EmailService;
 @Controller
 public class HomePage {
 
-	private final EmailService emailService;
+
 	
 @GetMapping("/")
 public  String home() {
@@ -28,18 +29,21 @@ public HomePage(EmailService emailService) {
     this.emailService = emailService;
 }
 
+@Autowired
+private EmailService emailService;
+
+
+
 @PostMapping("/contactInfo")
 public String contactInfo(
         @RequestParam String name,
-        @RequestParam long phone,
         @RequestParam String email,
-        @RequestParam String message,
-        @RequestParam String purpose) {
+        @RequestParam String phone,
+        @RequestParam String purpose,
+        @RequestParam String message) {
 
-    // Send email in background
-    emailService.sendContactEmail(name, email, phone, purpose, message);
-
-    // Immediately return thank you page
+    emailService.sendEmail(name, email, phone, purpose, message);
     return "thankspage";
 }
 }
+
